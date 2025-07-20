@@ -1,0 +1,12 @@
+<script type="module"> 
+  import buff from './buffer.js'
+  var buffer = buff()
+  var { Buffer } = buffer
+  //console.log(Buffer.prototype)
+  const buf = new Buffer([1, 2])
+  const uint8array = new Uint8Array(buf.buffer)
+  console.log(uint8array instanceof Uint8Array)
+  console.log(uint8array[0], 1)
+  console.log(uint8array[1], 2)
+  
+</script>
