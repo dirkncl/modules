@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta name="description" content="Ziploader.js : Zip Container Loader" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/prettify.css">
+    
+    <script type="module">
+      import { ZipLoader } from '../index.js'
+      document.addEventListener('DOMContentLoaded', function() {
+        var zl = new ZipLoader();
+        zl.applyElementAll('img[data-ziploader-archive]', 'src');
+      }, false);
+    </script>
+
+    <title>Ziploader.js</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/imaya/ziploader.js">View on GitHub</a>
+
+          <h1 id="project_title">Ziploader.js</h1>
+          <h2 id="project_tagline">Zip Container Loader</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/imaya/ziploader.js/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/imaya/ziploader.js/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+<!-- content -->
+        <h1>ziploader.js</h1>
+        <p>ziploader.js is a library for loading ZIP format files and applying them to the DOM.</p>
+        <h2>Instead of CSS sprites</h2>
+        <p>CSS sprites are one of the most well-known ways to optimize a website, reducing the number of HTTP requests by combining multiple images into a single sprite map. <br>While they can be combined into a single image, they are implemented as the background of an element, not as an img element, which is a traditional image.</p>
+        <p>In ziploader.js, after loading the zip file, the src attribute of each img element is rewritten and displayed, so it can be handled as an img element. <br>Also, since each image is a separate image, it is possible to enlarge or reduce them individually.</p>
+        <p>Here's how to pack the SVGs into a zip file and display it: <br> (If you check with the developer tools you'll see that it actually just downloads the zip file):</p>
+
+        <!-- svg zip -->
+        <img data-ziploader-archive="images/svg32.zip" data-ziploader-filename="access_bus.svg" width="4" height="4">
+        <img data-ziploader-archive="images/svg32.zip" data-ziploader-filename="access_train.svg" width="8" height="8">
+        <img data-ziploader-archive="images/svg32.zip" data-ziploader-filename="access_walk.svg" width="16" height="16">
+        <img data-ziploader-archive="images/svg32.zip" data-ziploader-filename="arrow_c_down.svg" width="32" height="32">
+        <img data-ziploader-archive="images/svg32.zip" data-ziploader-filename="arrow_c_left.svg" width="64" height="64">
+        <img data-ziploader-archive="images/svg32.zip" data-ziploader-filename="arrow_c_right.svg" width="128" height="128">
+        <img data-ziploader-archive="images/svg32.zip" data-ziploader-filename="arrow_c_up.svg" width="256" height="256">
+        <!-- svg zip -->
+
+        <p>All of these images are originally 32x32 SVG images.</p>
+        <p>This can be done simply by writing HTML and JavaScript as shown below:</p>
+        <h3>HTML</h3>
+        <p>First, write the URL of the zip file in the data-ziploader-archive attribute.<br>Then write the name of the file within the zip file in the data-ziploader-filename attribute.</p>
+<pre><code class="lang-html">&lt;img data-ziploader-archive=&quot;images/svg32.zip&quot; data-ziploader-filename=&quot;access_bus.svg&quot; width=&quot;4&quot; height=&quot;4&quot;&gt;
+&lt;img data-ziploader-archive=&quot;images/svg32.zip&quot; data-ziploader-filename=&quot;access_train.svg&quot; width=&quot;8&quot; height=&quot;8&quot;&gt;
+&lt;img data-ziploader-archive=&quot;images/svg32.zip&quot; data-ziploader-filename=&quot;access_walk.svg&quot; width=&quot;16&quot; height=&quot;16&quot;&gt;
+&lt;img data-ziploader-archive=&quot;images/svg32.zip&quot; data-ziploader-filename=&quot;arrow_c_down.svg&quot; width=&quot;32&quot; height=&quot;32&quot;&gt;
+&lt;img data-ziploader-archive=&quot;images/svg32.zip&quot; data-ziploader-filename=&quot;arrow_c_left.svg&quot; width=&quot;64&quot; height=&quot;64&quot;&gt;
+&lt;img data-ziploader-archive=&quot;images/svg32.zip&quot; data-ziploader-filename=&quot;arrow_c_right.svg&quot; width=&quot;128&quot; height=&quot;128&quot;&gt;
+&lt;img data-ziploader-archive=&quot;images/svg32.zip&quot; data-ziploader-filename=&quot;arrow_c_up.svg&quot; width=&quot;256&quot; height=&quot;256&quot;&gt;</code></pre>
+        <h3>JavaScript: Process all img elements with the data-archive attribute with ziploader.js</h3>
+        <pre><code class="lang-js"><span class="pln">document</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">'DOMContentLoaded'</span><span class="pun">,</span><span class="pln">&nbsp;</span><span class="kwd">function</span><span class="pun">()</span><span class="pln">&nbsp;</span><span class="pun">{</span><br><span class="pln">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="kwd">var</span><span class="pln">&nbsp;zl&nbsp;</span><span class="pun">=</span><span class="pln">&nbsp;</span><span class="kwd">new</span><span class="pln">&nbsp;</span><span class="typ">ZipLoader</span><span class="pun">();</span><br><span class="pln">&nbsp;&nbsp;&nbsp;&nbsp;zl</span><span class="pun">.</span><span class="pln">applyElementAll</span><span class="pun">(</span><span class="str">'img[data-ziploader-archive]'</span><span class="pun">,</span><span class="pln">&nbsp;</span><span class="str">'src'</span><span class="pun">);</span><br><span class="pun">},</span><span class="pln">&nbsp;</span><span class="kwd">false</span><span class="pun">);</span></code></pre>
+        <h2>During development, refer to the files directly instead of using zip files.</h2>
+        <p>It would be a pain to recreate the zip file every time you develop. <br>So, by using the js file built for development instead, you can directly reference the files from the directory with the same name as the zip file. <br>For example, in the above example,</p>
+        <ul>
+<li>images/svg32.zip/access_bus.svg</li>
+</ul>
+<p>If you place the file like this, the image will be displayed as is.</p>
+<h2>Fallback to PNG for environments that don't support SVG</h2>
+<p>Since SVG cannot be displayed on Android 2.x, you may want to display a PNG file instead. <br>Even in such a case, by calling ZipLoader#setSVGFallback(true); and then applyElementAll, the file with the .svg extension will be automatically replaced with .png on devices that do not support it.</p>
+
+
+
+<!-- content -->
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ziploader.js maintained by <a href="https://github.com/imaya">imaya</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
+
