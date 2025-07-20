@@ -1,6 +1,6 @@
 import { USE_TYPEDARRAY } from './hybrid.js'
 import { RawInflate } from './rawinflate.js'
-import { Zip } from './Zip.js'
+import { Zip } from './zip.js'
 import * as CRC32 from './crc32.js'
 
 /**
