@@ -191,7 +191,7 @@ export class Gzip {
   }
   
   /** @enum {number} */
-  staticOperatingSystem = {
+  static OperatingSystem = {
     FAT: 0,
     AMIGA: 1,
     VMS: 2,
@@ -210,7 +210,7 @@ export class Gzip {
   }
   
   /** @enum {number} */
-  staticFlagsMask = {
+  static FlagsMask = {
     FTEXT: 0x01,
     FHCRC: 0x02,
     FEXTRA: 0x04,
